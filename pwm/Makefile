@@ -39,6 +39,7 @@ OD=arm-none-eabi-objdump
 vpath %.c $(CDIR)
 vpath %.c $(LIBDIR)
 vpath %.cpp $(CXXDIR) 
+vpath %.cpp $(MAIN_DIR)
 vpath %.o $(OBJDIR)
 
 ##Dependancies and include paths

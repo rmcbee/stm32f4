@@ -41,6 +41,13 @@
 		
 		pwm(GPIO_TypeDef* bank, uint16_t pin, TIM_TypeDef* timer , uint8_t controlRegister, uint32_t inputFrequency = 100000);
 		
+		/*
+		* Function: set
+		* Usage: Sets the pwm out of 255 for the pin
+		* ----------------------
+		* Creates an instance of the servo class.
+		*/
+		
 	 
 		void set(uint8_t dutyCycle);
 		 
