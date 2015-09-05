@@ -6,8 +6,11 @@ PROJ_NAME=main
 #Names of folders located in the directory containing the makefile
 BUILDDIR=build
 OBJDIR = object
-CXXDIR = CPP_src
-CDIR = C_src
+CXXDIR =../source/CPP_src
+CDIR = ../source/C_src
+LIBDIR = lib
+SRC_INC_DIR = ../source/inc
+MAIN_DIR = main_folder
 
 LIBPATH=../Libraries
 
@@ -16,9 +19,11 @@ C_FILES = $(wildcard $(CDIR)/*.c)
 
 #CXX_FILES is the variable that stores the path to each .cpp file in the CPP_src folder
 CXX_FILES = $(wildcard $(CXXDIR)/*.cpp)
+MAIN_FILE = main
+MAIN_CXX = $(MAIN_FILE).cpp
 
 ##Startup File
-STARTUP = lib/startup_stm32f4xx.s
+STARTUP =$(LIBDIR)/startup_stm32f4xx.s
 
 #########################################################################
 
@@ -31,10 +36,11 @@ AS=arm-none-eabi-as
 CP=arm-none-eabi-objcopy
 OD=arm-none-eabi-objdump
 
-vpath %.c C_src
-vpath %.c lib
-vpath %.cpp CPP_src 
-vpath %.o object
+vpath %.c $(CDIR)
+vpath %.c $(LIBDIR)
+vpath %.cpp $(CXXDIR) 
+vpath %.cpp $(MAIN_DIR)
+vpath %.o $(OBJDIR)
 
 ##Dependancies and include paths
 
@@ -50,7 +56,7 @@ STM32_INCLUDES = -I$(LIBPATH)/CMSIS/Device/ST/STM32F4xx/Include/ \
 	-I$(LIBPATH)/STM32_USB_OTG_Driver/inc/ \
 	-I$(LIBPATH)/STM32_EVAL/STM3240_41_G_EVAL/ \
 	-I$(LIBPATH)/STM32_EVAL/Common/ \
-	-Iinc/
+	-I$(SRC_INC_DIR)/
 
 ##Optimizations - keep this at -0s
 OPTIMIZE       = -Os
@@ -126,6 +132,10 @@ CXX_USED_OBJ:=$(CXX_OBJ:%=$(OBJDIR)/%)
 C_OBJ:=$(C_FILES:$(CDIR)/%.c=%.o)
 C_USED_OBJ:=$(C_OBJ:%=$(OBJDIR)/%)
 
+#MAIN_OBJ is the variable name for the oject created for the .cpp file holding the main function
+MAIN_OBJ = $(MAIN_FILE).o
+MAIN_USED_OBJ = $(OBJDIR)/$(MAIN_OBJ)
+
 ####################################################################
 
 .PHONY: proj
@@ -139,13 +149,13 @@ burn:
 dfu:
 	dfu-util -a 0 --dfuse-address 0x08000000 -D $(BUILDDIR)/$(PROJ_NAME).bin
 
-proj: $(CXX_OBJ) $(C_OBJ) misc.o $(PROJ_NAME).elf
+proj: $(CXX_OBJ) $(C_OBJ) $(MAIN_OBJ) misc.o $(PROJ_NAME).elf
 
 #Creates a new .elf file if any files in the CXX or C source code folders change
-$(PROJ_NAME).elf: $(CXX_FILES) $(C_FILES)
+$(PROJ_NAME).elf: $(CXX_FILES) $(C_FILES) $(MAIN_CXX)
 	
 	#Links all of the object files together using the g++ compiler
-	@$(CXX) $(CXX_USED_OBJ) $(C_USED_OBJ) $(C_LIB_USED_OBJ) $(MCFLAGS) -Wl,-T,lib/stm32_flash.ld --specs=nosys.specs  -o $(BUILDDIR)/$@
+	@$(CXX) $(CXX_USED_OBJ) $(C_USED_OBJ) $(C_LIB_USED_OBJ) $(MAIN_USED_OBJ) $(MCFLAGS) -Wl,-T,lib/stm32_flash.ld --specs=nosys.specs -o $(BUILDDIR)/$@
 	#All files linked
 	@$(CP) -O binary $(BUILDDIR)/$(PROJ_NAME).elf $(BUILDDIR)/$(PROJ_NAME).bin
 	#Jolly Good. Everything is in tip top shape.
@@ -157,6 +167,7 @@ $(PROJ_NAME).elf: $(CXX_FILES) $(C_FILES)
 %.o: %.cpp
 	#CPP File
 	#Creates the object files from the .cpp files
+	#2
 	$(CXX) $(CXXFLAGS) $< -o $(OBJDIR)/$@
 	
 misc.o: 
