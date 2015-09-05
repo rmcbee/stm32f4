@@ -9,7 +9,7 @@ This respository contains a library for initializing and using the different per
 This readme also contains instructions on how to set up your computer to be able to program these chips.
 
 ## How to get setup on Linux or Mac: 
-1. Download GCC-ARM for your system from here https://launchpad.net/gcc-arm-embedded/+download
+1. Download GCC-ARM for your system from here https://launchpad.net/gcc-arm-embedded/+download 
 2. Setup the path on your computer to the location of the downloaded GCC-ARM
 3. Clone this directory to your computer
 4. Clone the STLink program from the link above into a directory of your choosing
