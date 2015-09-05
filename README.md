@@ -35,26 +35,6 @@ This readme also contains instructions on how to set up your computer to be able
 ## Git How To
 Please see the GitCommands.markdown file for basics on how to use git for this project.
 
-
-### Tasks for embeded programming team 
-
-
-
-### Who has our STM32F4 nucleo boards
-
-
-
-#### Still useful but outdatd links
-
-How to setup envirns
-
-Windows with GCC and openOCD (not IAR) : http://www.angstromsandalgorithms.com/free-eclipse-arm-gcc-openocd-toolchain-for-windows-part-2-arm-gcc/
-
-Linux: http://eliaselectronics.com/stm32f4-tutorials/setting-up-the-stm32f4-arm-development-toolchain/
-
-and OSX : http://spin.atomicobject.com/2013/08/10/arm-cortex-m-toolchain/
-
-
 Things to do
 
 #### Main board
