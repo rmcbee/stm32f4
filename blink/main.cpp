@@ -1,7 +1,6 @@
 #include "stm32f4xx_conf.h"  //includes the standard peripheral library
 
 /* C++ libraries */
-#include "led.h"
 #include "gpio.h"
 #include "servo.h"
 #include "pwm.h"

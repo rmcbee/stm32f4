@@ -1,6 +1,6 @@
 # stm32f4
 
-This respository contains a library for initializing and using the different peripherals offered by the stm32f4 family of microcontrollers.  
+This setup is based on the STM32F4xx_StdPeriph_Driver as well as the excellent Linux port of STLink by [Texane](https://github.com/texane/stlink) 
 
 # Latest update 
 

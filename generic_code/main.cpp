@@ -1,7 +1,7 @@
+//includes all of the standard peripheral libraries
 #include "stm32f4xx_conf.h"
 
 /* C++ libraries */
-#include "led.h"
 #include "gpio.h"
 #include "servo.h"
 #include "pwm.h"
@@ -26,6 +26,7 @@
 	}
 }
 
+//initializes the leds used for debugging  
 gpio green(GPIOD, GPIO_Pin_12);  
 gpio orange(GPIOD, GPIO_Pin_13);
 gpio red(GPIOD, GPIO_Pin_14);
@@ -37,15 +38,15 @@ int main(void)
 	
 	
 
-  while (1)
-  {
+	while (1)
+	{
 
 
-	  green.toggle();
+		green.toggle();
 	  
-	  Delay(0xffffff);
+		Delay(0xffffff);
     
-  }
+	}
 }
 
 

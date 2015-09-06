@@ -10,6 +10,41 @@
 //Not sure if the priority in the NVIC should be different or if all of them can be the same
 
 
+/*
+	USART    		TX				RX
+	--------------------------------------------------------------------------------
+	1			DMA2_Stream7	DMA2_Stream2
+								DMA2_Stream5
+						DMA_Channel_4	
+				
+	2			DMA1_Stream6	DMA1_Stream5	
+						DMA_Channel_4
+	
+	3			DMA1_Stream3	DMA1_Stream1	
+						DMA_Channel_4
+				DMA1_Stream4
+						DMA_Channel_7
+		
+	4			DMA1_Stream4	DMA1_Stream2	
+						DMA_Channel_4
+	
+	5			DMA1_Stream7	DMA1_Stream0	
+						DMA_Channel_4
+	
+	6			DMA2_Stream6	DMA2_Stream1
+`				DMA2_Stream7	DMA2_Stream2	
+						DMA_Channel_5
+	
+	7			DMA1_Stream1	DMA1_Stream3	
+						DMA_Channel_5
+	
+	
+	8			DMA1_Stream0	DMA1_Stream6	
+						DMA_Channel_5
+	
+*/
+
+
 
 class usartDma
 {

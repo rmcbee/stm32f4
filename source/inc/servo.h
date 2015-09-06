@@ -10,8 +10,8 @@
  *	note 2: Timers 6 and 7 are unable to be used for PWM.
  *
  *	-----------------------------------------------------------------------------------------
- *	|	A0  TIM2, TIM5	|	B0	TIM3	|	C6	TIM3, TIM8	|	E5	TIM9	|	H6	TIM12	|
- *  |	A1	TIM2, TIM5	|	B1	TIM3	|	C7	TIM3, TIM8	|	E6	TIM9	|	H9	TIM12	|
+ *	|	A0    TIM2, TIM5	|	B0	TIM3	|	C6	TIM3, TIM8	|	E5	TIM9	|	H6	TIM12	|
+ * 	|	A1	TIM2, TIM5	|	B1	TIM3	|	C7	TIM3, TIM8	|	E6	TIM9	|	H9	TIM12	|
  *	|	A2	TIM2, TIM5	|	B3	TIM2	|	C8	TIM3, TIM8	|	E9	TIM1	|	H10	TIM5	|
  *	|	A3	TIM2, TIM5	|	B4	TIM3	|	C9	TIM3, TIM8	|	E10	TIM1	|	H11	TIM5	|
  *	|	A5	TIM2		|	B5 	TIM3	|					|	E13	TIM1	|	H12 TIM5	|
@@ -19,8 +19,8 @@
  *	|	A7	TIM3		|	B7 	TIM4	|	D13	TIM4		|				|	I0	TIM5	|
  *	|	A8	TIM1		|	B8	TIM4	|	D14	TIM4		|	F6	TIM10	|	I2	TIM8	|
  *	|	A9	TIM1		|	B9	TIM4	|	D15	TIM4		|	F7	TIM11	|	I5	TIM8	|
- *	|	A10 TIM1		|	B10	TIM2	|					|	F8	TIM13	|	I6	TIM8	|
- *	|	A11	TIM1		|	B11 TIM2	|					|	F9	TIM14	|	I7	TIM8	|
+ *	|	A10  TIM1		|	B10	TIM2	|					|	F8	TIM13	|	I6	TIM8	|
+ *	|	A11	TIM1		|	B11 TIM2		|					|	F9	TIM14	|	I7	TIM8	|
  *	|	A15	TIM2		|	B14	TIM12	|					|				|				|
  *	|					|	B15 TIM12	|					|				|				|   
  * ------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ class servo
 	
 		uint8_t currentAngle = 0; //The angle that the servo is set to
 		uint8_t controlRegisterNum; //The number of the control register that is outputting pwm signal to the servo
-		double maxPulse = 2.6; //The max length (in ms) the the pwm is high each period
+		double maxPulse = 2.1; //The max length (in ms) the the pwm is high each period
 		double minPulse = 0.8; //The min length (int ms) the pwm is high for each period
 		double maxAngle = 180; //the maximum angle that a servo can be set to
 		double minAngle = 0; //The minimum angle that a servo can be set to

@@ -1,7 +1,6 @@
 #include "stm32f4xx_conf.h"
 
 /* C++ libraries */
-#include "led.h"
 #include "gpio.h"
 #include "servo.h"
 #include "pwm.h"
@@ -45,6 +44,8 @@ gpio orange(GPIOD, GPIO_Pin_11);
 gpio red(GPIOD, GPIO_Pin_12);
 gpio blue(GPIOD, GPIO_Pin_13);
 
+gpio enable(GPIOD, GPIO_Pin_0);
+
 
 int main(void)
 {
@@ -64,23 +65,27 @@ int main(void)
 		packet[i][0] = 0x12;  //This is out of place because it gives me errors if I set the start byte value first
 	}
 	
-	
+	enable.on();
 	
 	
   while (1)
   {
-	for(int i = 0; i < 8; i++)
+	if(USART_GetITStatus(UART5, USART_IT_RXNE))
 	{
-		four.write(packet[i], 7);  
+		four.read();
+	}
+	  
+	  
+	  for(int i = 0; i < 8; i++)
+	{
+		four.write(packet[i],7 );  
 	}
 	  
 	  
 	  
-	Delay(0xfffff);
+	Delay(0xfffff1);
 
-	green.on();  
-	orange.on();
-	red.on();
+	green.toggle();  
     
   }
 }

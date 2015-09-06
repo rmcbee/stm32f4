@@ -56,6 +56,8 @@ serial::serial(GPIO_TypeDef* bankPinTx, uint16_t pinTx, GPIO_TypeDef* bankPinRx,
 
 uint8_t serial::read()
 {
+	while(!USART_GetITStatus(thisUsart, USART_IT_RXNE));
+	
 	return (USART_ReceiveData(thisUsart));
 }
 
