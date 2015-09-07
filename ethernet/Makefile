@@ -22,6 +22,7 @@ LIBPATH=../Libraries
 
 #C_FILES is the variable that stores the path to each .c file in the C_src folder 
 C_FILES = $(wildcard $(CDIR)/*.c)
+C_FILES += $(wildcard $(TM_C)/*.c)
 
 #CXX_FILES is the variable that stores the path to each .cpp file in the CPP_src folder
 CXX_FILES = $(wildcard $(CXXDIR)/*.cpp)
@@ -68,7 +69,16 @@ STM32_INCLUDES = -I$(LIBPATH)/CMSIS/Device/ST/STM32F4xx/Include/ \
 	-I$(LIBPATH)/STM32_USB_OTG_Driver/inc/ \
 	-I$(LIBPATH)/STM32_EVAL/STM3240_41_G_EVAL/ \
 	-I$(LIBPATH)/STM32_EVAL/Common/ \
-	-I$(SRC_INC_DIR)/
+	-I$(SRC_INC_DIR)/\
+	-I$(TM_H)/\
+	-I$(LWIP_H)/\
+	-I$(LWIP_H)/src/include/\
+	-I$(LWIP_H)/src/include/lwip/\
+	-I$(LWIP_H)/port/\
+	-I$(LWIP_H)/src/include/ipv4/
+	
+	
+	
 
 ##Optimizations - keep this at -0s
 OPTIMIZE       = -Os
@@ -148,6 +158,10 @@ C_USED_OBJ:=$(C_OBJ:%=$(OBJDIR)/%)
 MAIN_OBJ = $(MAIN_FILE).o
 MAIN_USED_OBJ = $(OBJDIR)/$(MAIN_OBJ)
 
+
+
+
+
 ####################################################################
 
 .PHONY: proj
@@ -161,7 +175,7 @@ burn:
 dfu:
 	dfu-util -a 0 --dfuse-address 0x08000000 -D $(BUILDDIR)/$(PROJ_NAME).bin
 
-proj: $(CXX_OBJ) $(C_OBJ) $(MAIN_OBJ) misc.o $(PROJ_NAME).elf
+proj: $(CXX_OBJ) $(C_OBJ) $(MAIN_OBJ) misc.o   $(PROJ_NAME).elf
 
 #Creates a new .elf file if any files in the CXX or C source code folders change
 $(PROJ_NAME).elf: $(CXX_FILES) $(C_FILES) $(MAIN_CXX)
@@ -185,6 +199,8 @@ $(PROJ_NAME).elf: $(CXX_FILES) $(C_FILES) $(MAIN_CXX)
 misc.o: 
 	$(CC) $(CFLAGS) $(C_LIB_SRC) -lm -lc -lnosys
 	@mv $(C_LIB_OBJ) ./$(OBJDIR)
+	
+
 	
 clean:
 	rm -f Startup.lst  $(BUILDDIR)/$(PROJ_NAME)  $(BUILDDIR)/$(PROJ_NAME).lst $(AUTOGEN)  $(BUILDDIR)/$(PROJ_NAME).out $(BUILDDIR)/$(PROJ_NAME).map \

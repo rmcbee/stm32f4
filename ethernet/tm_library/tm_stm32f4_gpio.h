@@ -1,4 +1,4 @@
-/** 
+ /** 
  * @author  Tilen Majerle
  * @email   tilen@majerle.eu
  * @website http://stm32f4-discovery.com
@@ -32,7 +32,7 @@
 
 /* C++ detection */
 #ifdef __cplusplus
-extern C {
+//extern C {
 #endif
 	
 /**
@@ -423,7 +423,7 @@ uint16_t TM_GPIO_GetFreePins(GPIO_TypeDef* GPIOx);
 
 /* C++ detection */
 #ifdef __cplusplus
-}
+//}
 #endif
 
 #endif

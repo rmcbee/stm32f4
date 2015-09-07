@@ -16,17 +16,12 @@
 
 #include "interrupts.h"  //where the interrupt functions are located
 #include "stm32f4xx_it.h"  //where non peripheral interrupt are located
-#include <cstdarg>  //library to allow variable amount of argument inputs
+//#include <cstdarg>  //library to allow variable amount of argument inputs
 
 
 
 
- void Delay(__IO uint32_t nCount) 
-{ 
-	while(nCount--)
-	{
-	}
-}
+ 
 
 //initializes the leds used for debugging  
 gpio green(GPIOD, GPIO_Pin_12);  

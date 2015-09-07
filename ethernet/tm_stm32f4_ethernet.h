@@ -33,7 +33,7 @@
 
 /* C++ detection */
 #ifdef __cplusplus
-extern C {
+//extern C {
 #endif
 /**
  * @addtogroup TM_STM32F4xx_Libraries
@@ -1143,7 +1143,7 @@ void TM_ETHERNET_INT_LinkIsUpCallback(void);
 
 /* C++ detection */
 #ifdef __cplusplus
-}
+//}
 #endif
 
 #endif
