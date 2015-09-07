@@ -39,17 +39,17 @@ uint8_t checksum(uint8_t* packet, uint8_t size) {
 	}
 }
 
-gpio green(GPIOD, GPIO_Pin_10);  
-gpio orange(GPIOD, GPIO_Pin_11);
-gpio red(GPIOD, GPIO_Pin_12);
-gpio blue(GPIOD, GPIO_Pin_13);
+gpio green(GPIOD, GPIO_Pin_12);  
+gpio orange(GPIOD, GPIO_Pin_13);
+gpio red(GPIOD, GPIO_Pin_14);
+gpio blue(GPIOD, GPIO_Pin_15);
 
-gpio enable(GPIOD, GPIO_Pin_0);
-
+gpio enable(GPIOC, GPIO_Pin_8);
+gpio enables(GPIOC, GPIO_Pin_9);
 
 int main(void)
 {
-	serial four(GPIOD, GPIO_Pin_2, GPIOC, GPIO_Pin_12, UART5, 57600);
+	serial four(GPIOC, GPIO_Pin_7, GPIOC, GPIO_Pin_6, USART6, 57600);
 	
 	uint8_t packet[8][7];
 	
@@ -59,21 +59,17 @@ int main(void)
 		packet[i][1] = i + 1;
 		packet[i][2] = 1;
 		packet[i][3] = 1;
-		packet[i][4] = 100;
+		packet[i][4] = 60;
 		packet[i][5] = checksum(packet[i], 4);
 		packet[i][6] = 0x13;
 		packet[i][0] = 0x12;  //This is out of place because it gives me errors if I set the start byte value first
 	}
 	
 	enable.on();
-	
+	enables.on();
 	
   while (1)
   {
-	if(USART_GetITStatus(UART5, USART_IT_RXNE))
-	{
-		four.read();
-	}
 	  
 	  
 	  for(int i = 0; i < 8; i++)
