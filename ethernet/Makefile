@@ -12,17 +12,13 @@ LIBDIR = lib
 SRC_INC_DIR = ../source/inc
 MAIN_DIR = main_folder
 
-TM_H = tm_library
-TM_C = tm_library
-
-LWIP_H = lwip
-LWIP_C = lwip
+LWIP_DIR = ../source/lwip_v1.3.2
 
 LIBPATH=../Libraries
 
 #C_FILES is the variable that stores the path to each .c file in the C_src folder 
 C_FILES = $(wildcard $(CDIR)/*.c)
-C_FILES += $(wildcard $(TM_C)/*.c)
+
 
 #CXX_FILES is the variable that stores the path to each .cpp file in the CPP_src folder
 CXX_FILES = $(wildcard $(CXXDIR)/*.cpp)
@@ -48,11 +44,7 @@ vpath %.c $(LIBDIR)
 vpath %.cpp $(CXXDIR) 
 vpath %.o $(OBJDIR)
 
-vpath %.c $(TM_C)
-vpath %.h  $(TM_H)
 
-vpath %.c $(LWIP_C)
-vpath %.h  $(LWIP_H)
 
 
 ##Dependancies and include paths
@@ -70,12 +62,11 @@ STM32_INCLUDES = -I$(LIBPATH)/CMSIS/Device/ST/STM32F4xx/Include/ \
 	-I$(LIBPATH)/STM32_EVAL/STM3240_41_G_EVAL/ \
 	-I$(LIBPATH)/STM32_EVAL/Common/ \
 	-I$(SRC_INC_DIR)/\
-	-I$(TM_H)/\
-	-I$(LWIP_H)/\
-	-I$(LWIP_H)/src/include/\
-	-I$(LWIP_H)/src/include/lwip/\
-	-I$(LWIP_H)/port/\
-	-I$(LWIP_H)/src/include/ipv4/
+	-I$(LWIP_DIR)/port/STM32F4x7/Standalone \
+	-I$(LWIP_DIR)/port/STM32F4x7 \
+	-I$(LWIP_DIR)/src/include/ipv4 \
+	-I$(LWIP_DIR)/src/include/lwip \
+	-I$(LWIP_DIR)/src/include
 	
 	
 	
